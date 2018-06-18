@@ -6,7 +6,7 @@
 /*   By: agoulas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 18:40:21 by agoulas           #+#    #+#             */
-/*   Updated: 2018/06/01 17:30:17 by agoulas          ###   ########.fr       */
+/*   Updated: 2018/06/18 13:44:23 by agoulas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		ft_wctomb(char *tmp, wchar_t org)
 {
-	int  len;
+	int len;
 
 	if ((len = ft_wclen(org)) == -1 || tmp == NULL)
 		return (-1);
