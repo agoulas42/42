@@ -1,0 +1,34 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    04                                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: agoulas <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/02/09 17:05:23 by agoulas           #+#    #+#              #
+#    Updated: 2018/02/21 16:10:41 by agoulas          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+#!/bin/bash
+cat >04_2 <<'END'
+#!/bin/bash
+#Nom du fichier à surveiller
+NAME="/etc/crontab"
+# Date de la dernière modification du fichier ci-dessus
+LASTMD5=$(md5 ${NAME})
+DATE_MODIF=$(date -r ${NAME} '+%d/%m/%Y %H:%M')
+# Adresse mail de l'administrateur ou de la personne à prévenir
+MAIL_ADMIN="root"
+# Date a laquelle le fichier à bien été modifié par vos soins
+	if [ -e test_time ] ; then
+		LASTMODIF=$(cat test_time)
+		if [ "${LASTMD5}" != "${LASTMODIF}" ]; then
+			CORPS_MESSAGE="Alerte, le fichier ${NOM_FICHIER} a été modifié le ${DATE_MODIF}";
+			echo "$CORPS_MESSAGE" | mail -s "Alerte surveillance modification de fichier" "${MAIL_ADMIN}";
+			echo "$(md5 ${NAME})" > test_time;
+		fi
+	else
+		echo "$(md5 ${NAME})" > test_time;
+fi
+END
+echo "0 0 * * * root 04_2" >>/etc/crontab; /etc/init.d/cron restart

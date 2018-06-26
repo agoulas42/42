@@ -1,0 +1,19 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    02                                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: agoulas <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/02/16 16:28:00 by agoulas           #+#    #+#              #
+#    Updated: 2018/02/21 16:06:24 by agoulas          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#!/bin/bash
+cat >02_2 <<EOF
+#!/bin/bash
+apt-get update -y > /var/log/update_script.log
+apt-get upgrade -y >> /var/log/update_script.log
+EOF
+echo "0 4 * * 0 root 02_2" >> /etc/crontab; /etc/init.d/cron restart
