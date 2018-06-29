@@ -6,7 +6,7 @@
 /*   By: agoulas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:05:01 by agoulas           #+#    #+#             */
-/*   Updated: 2018/06/25 14:46:00 by agoulas          ###   ########.fr       */
+/*   Updated: 2018/06/27 13:44:53 by agoulas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static char	*ft_p_value(va_list *ap)
 
 	num = NULL;
 	value = (uintmax_t)va_arg(*ap, uintmax_t);
-	num = ft_itoa_base_uox(value, 16);
-	ft_strtolower_rea(&num);
+	num = ft_itoa_base_uox(value, 16, 0);
 	return (num);
 }
 

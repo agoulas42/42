@@ -6,7 +6,7 @@
 /*   By: agoulas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:33:26 by agoulas           #+#    #+#             */
-/*   Updated: 2018/06/25 18:26:47 by agoulas          ###   ########.fr       */
+/*   Updated: 2018/06/28 16:55:12 by agoulas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ int							ft_fl_diese(char **s, union u_uox value,
 		t_conv *p);
 char						*ft_itoa_union_di(union u_di value, t_conv *p);
 char						*ft_itoa_union_uox(union u_uox value, t_conv *p);
-char						*ft_itoa_base_uox(uintmax_t value, int base);
+char						*ft_itoa_base_uox(uintmax_t value, int base,
+		int maj);
 int							ft_init_union_di(union u_di *value, t_conv *p,
 		va_list *ap);
 int							size_value(char *num, t_conv *p, union u_di value);
@@ -149,4 +150,6 @@ int							ft_conv_wchar(char **buf, wchar_t c, int lentgh);
 int							ft_wc_nbr(wchar_t *s, int nbr);
 int							ft_strwchar(char **res, wchar_t *s, t_conv *p);
 int							ft_buffer_check(t_format **f, int length);
+void						ft_add_0x_o(char **num, t_conv *p);
+void						ft_add_0x_x(t_format **f, int i, t_conv *p);
 #endif

@@ -6,7 +6,7 @@
 /*   By: agoulas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:16:44 by agoulas           #+#    #+#             */
-/*   Updated: 2018/06/04 17:07:16 by agoulas          ###   ########.fr       */
+/*   Updated: 2018/06/29 17:11:55 by agoulas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,22 @@ int		specifier_di(char c)
 
 int		size_value(char *num, t_conv *p, union u_di value)
 {
-	signed int size;
+	signed int	size;
+	int			d;
+	int			ret_signe;
 
+	d = ft_strlen(num);
+	ret_signe = return_sign_num(p, value);
 	size = 0;
-	if (p->precs == 0 && return_sign_num(p, value) == 0)
+	if (p->precs == 0 && ret_signe == 0)
 		size = 0;
-	else if ((p->precs == 0 && return_sign_num(p, value) != 0)
-			|| p->precs == -1 || p->precs <= (int)ft_strlen(num))
+	else if ((p->precs == 0 && ret_signe != 0) || p->precs <= d)
 		size = ft_strlen(num);
-	else if (p->precs > (int)ft_strlen(num) && p->precs > -1)
+	else if (p->precs > d && p->precs > -1)
 		size = p->precs;
-	if (p->fl_plus == 1 || (p->fl_space == 1)
-			|| return_sign_num(p, value) == -1)
+	if (p->fl_plus == 1 || (p->fl_space == 1) || ret_signe == -1)
 		size++;
-	if (p->width != 0 && p->width > size)
+	if (p->width > 0 && p->width > size)
 		size = p->width;
 	if (size < 0)
 		size = 0;

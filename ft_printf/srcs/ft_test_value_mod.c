@@ -6,7 +6,7 @@
 /*   By: agoulas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:54:46 by agoulas           #+#    #+#             */
-/*   Updated: 2018/04/26 15:12:35 by agoulas          ###   ########.fr       */
+/*   Updated: 2018/06/27 14:50:12 by agoulas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ static int		return_num_jz(t_conv *p, union u_di value)
 	}
 	else if (p->length == z)
 	{
-		if (value.z == 0)
+		if (value.z < 0)
+			return (-1);
+		else if (value.z == 0)
 			return (0);
 		else
 			return (1);

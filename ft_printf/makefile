@@ -6,14 +6,14 @@
 #    By: agoulas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/26 12:06:01 by agoulas           #+#    #+#              #
-#    Updated: 2018/06/26 15:14:19 by agoulas          ###   ########.fr        #
+#    Updated: 2018/06/29 17:23:19 by agoulas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 NAME = libftprintf.a
-CFLAGS = -Wall -Wextra -g -W -pedantic
-CFLAGS2 = -Wall -Wextra -g -W -pedantic
+CFLAGS = -Wall -Werror -Wextra -w -pedantic
+CFLAGS2 = -Wall -Werror -Wextra -W -pedantic
 HEADER = includes
 CPPFLAGS = -I $(HEADER)
 
@@ -25,7 +25,7 @@ CLIBFT = -Llibft -lft
 CLIBPRT = -L. -lftprintf
 
 SRC = ft_printf.c\
-	  ft_itoa_base_di.c\
+	  ft_itoa_base_printf.c\
 	  ft_flags.c\
 	  ft_format.c\
 	  ft_parsing_f.c\
@@ -86,8 +86,6 @@ $(NAME) : $(DIR_O) $(OBJS)
 	@ar rc $(NAME) $(OBJS) $(OBJS_LIB)
 	@ranlib $(NAME)
 	@echo "[$(PURPLE)Make $(NAME) done$(RESET)]"
-	@cp libftprintf.a testeur
-	@make -C testeur
 
 $(DIR_O):
 	@mkdir build/
@@ -104,9 +102,6 @@ fclean : clean
 	@make -C libft fclean
 
 re : fclean all
-
-test: $(NAME) main.o
-	$(CC) $(CFLAGS2) -o $@ main.o $(CLIBPRT) $(CLIBFT) 
 
 norme :
 	@norminette $(SRCS) $(SRCS_L) $(HEADER)

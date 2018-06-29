@@ -6,7 +6,7 @@
 /*   By: agoulas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:20:46 by agoulas           #+#    #+#             */
-/*   Updated: 2018/06/25 14:44:03 by agoulas          ###   ########.fr       */
+/*   Updated: 2018/06/27 13:56:40 by agoulas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,7 @@ int			ft_handle_d_i(t_format **f, t_conv *p, va_list *ap)
 
 	num = NULL;
 	ft_init_union_di(&value, p, ap);
-	(num = ft_itoa_union_di(value, p));
-	char_abs_nbr(&num, value, p);
+	num = ft_itoa_union_di(value, p);
 	size = size_value(num, p, value);
 	ft_buffer_check(f, size);
 	hand_di(f, &num, p, value);

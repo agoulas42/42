@@ -6,7 +6,7 @@
 /*   By: agoulas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 14:58:33 by agoulas           #+#    #+#             */
-/*   Updated: 2018/06/25 14:42:46 by agoulas          ###   ########.fr       */
+/*   Updated: 2018/06/29 16:10:43 by agoulas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ int				size_value_uox(char *num, t_conv *p, union u_uox value)
 {
 	signed int	size;
 	int			d;
+	int			ret_signe;
 
 	size = 0;
+	ret_signe = return_sign_uox(p, value);
 	d = ft_strlen(num);
-	if ((p->precs == 0 && return_sign_uox(p, value) != 0)
-			|| p->precs == -1 || p->precs <= d)
+	if ((p->precs == 0 && ret_signe != 0) || p->precs == -1 || p->precs <= d)
 		size = d;
 	else if ((p->precs > d && p->precs > -1) || p->precs > p->width)
 		size = p->precs;
-	if (p->fl_diese == 1 && return_sign_uox(p, value) != 0)
+	if (p->fl_diese == 1 && ret_signe != 0)
 	{
-		size++;
+		if (p->specifier == 'o' || p->specifier == 'O')
+			size++;
 		if (p->specifier == 'x' || p->specifier == 'X')
 			size++;
 	}
@@ -70,18 +72,19 @@ int				ft_init_union_uox(union u_uox *value, t_conv *p, va_list *ap)
 
 static char		*ft_union_uox_aux(uintmax_t n, t_conv *p)
 {
-	char *s;
+	char	*s;
+	int		maj;
 
+	maj = 1;
 	s = NULL;
 	if (p->specifier == 'u' || p->specifier == 'U')
-		s = ft_itoa_base_uox(n, 10);
+		s = ft_itoa_base_uox(n, 10, maj);
 	if (p->specifier == 'o' || p->specifier == 'O')
-		s = ft_itoa_base_uox(n, 8);
+		s = ft_itoa_base_uox(n, 8, maj);
 	if (p->specifier == 'x' || p->specifier == 'X')
 	{
-		s = ft_itoa_base_uox(n, 16);
-		if (p->specifier == 'x')
-			ft_strtolower_rea(&s);
+		maj = (p->specifier == 'x') ? 0 : 1;
+		s = ft_itoa_base_uox(n, 16, maj);
 	}
 	return (s);
 }

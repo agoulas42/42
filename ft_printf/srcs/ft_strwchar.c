@@ -6,7 +6,7 @@
 /*   By: agoulas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 15:53:12 by agoulas           #+#    #+#             */
-/*   Updated: 2018/06/26 12:21:52 by agoulas          ###   ########.fr       */
+/*   Updated: 2018/06/29 17:07:16 by agoulas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ int			ft_strwchar(char **res, wchar_t *s, t_conv *p)
 
 	d = ft_wc_nbr(s, p->precs);
 	u = (p->precs > -1 && p->precs < (int)d) ? p->precs : d;
-	if ((*res = ft_strnew(ft_wc_nbr(s, p->precs))) == NULL)
+	if ((*res = ft_strnew(ft_wc_nbr(s, p->precs) + 1)) == NULL)
 		return (0);
-	if (p->precs != -1 && p->precs <= (int)ft_wcslen(s))
+	if (p->precs != -1 && p->precs <= ((int)ft_wcslen(s)))
 	{
 		i = 0;
-		while (s[i] && i < u && ((ft_strlen(*res) + ft_wclen(s[i])) < d))
+		while (s[i] && i < u && ((ft_strlen(*res) + ft_wclen(s[i])) <= d))
 		{
 			if (((v = ft_conv_wchar(res, s[i], p->precs))) < 0)
 				return (-1);
